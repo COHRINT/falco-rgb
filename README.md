@@ -66,7 +66,7 @@ If you are about to write instructions in a README file, you might want to do it
    ```bash
    python detection_imagePub.py
    ```
-   If you want to stop the program, click on the display screen then type "Q" or "ESC".
+   If you want to stop the program, click on the display screen then type "q" or "ESC".
    
 ## Requirements
 

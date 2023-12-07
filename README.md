@@ -19,7 +19,7 @@ The `generate_action()` function is a critical method included in the "falco_fun
 
 - **policy.out**: The policy.out file is where the SARSOP-generated policy is saved. A POMDP policy defines the action the agent should perform (in this case, whether to alert the operator, gather more information, or continue the mission), depending on its belief state. The policy.out file essentially contains the decisions or actions that the system should take under different states and observations.
 
-## How to launch
+## How to launch RGB-FALCO
 
 If you are about to write instructions in a README file, you might want to do it as follows:
 

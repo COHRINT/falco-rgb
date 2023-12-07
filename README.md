@@ -38,6 +38,7 @@ If you are about to write instructions in a README file, you might want to do it
     ```
     The YOLO weights are stored in the `yolo_weights.h5` file. Make sure to download in the cloned folder containing the following files: `falco_function.jl`, `detection_imagePub.py`, and `policy.out`.
 4. **Dependencies**
+
    Run the following command to install all dependencies
    ```bash
    pip install -r requirements.txt

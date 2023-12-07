@@ -43,7 +43,13 @@ If you are about to write instructions in a README file, you might want to do it
     ```bash
     cam_feed = cv2.VideoCapture(0)
     ```
-    
+    If you want to use Real Time Streaming Protocol
+    ```bash
+    cam_feed = cv2.VideoCapture("rtsp:<rtsp_url>")
+    ------------------------------------------------------------------------------------
+    Example: rtsp_url = //rinao:unicorn@192.168.1.5:8554/streaming/live/1
+    cam_feed = cv2.VideoCapture("rtsp://rinao:unicorn@192.168.1.5:8554/streaming/live/1")
+    ```
 5. **Run the autonomous detection framework**
    ```bash
    python detection_imagePub.py

@@ -45,9 +45,9 @@ If you are about to write instructions in a README file, you might want to do it
     ```
     If you want to use Real Time Streaming Protocol
     ```bash
-    cam_feed = cv2.VideoCapture("rtsp:<rtsp_url>")
+    cam_feed = cv2.VideoCapture("<rtsp_url>")
     ------------------------------------------------------------------------------------
-    Example: rtsp_url = //rinao:unicorn@192.168.1.5:8554/streaming/live/1
+    Example: rtsp_url = rtsp://rinao:unicorn@192.168.1.5:8554/streaming/live/1
     cam_feed = cv2.VideoCapture("rtsp://rinao:unicorn@192.168.1.5:8554/streaming/live/1")
     ```
 5. **Run the autonomous detection framework**

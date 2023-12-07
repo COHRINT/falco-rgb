@@ -37,7 +37,8 @@ If you are about to write instructions in a README file, you might want to do it
     https://drive.google.com/drive/folders/1dicOWSAtrVBVZ9JX94gTCl-clzZJ3_im?usp=sharing
     ```
     The YOLO weights are stored in the `yolo_weights.h5` file. Make sure to download in the cloned folder containing the following files: `falco_function.jl`, `detection_imagePub.py`, and `policy.out`.
-4. **Chose your camera feed input**\\
+4. **Chose your camera feed input**
+   
    If you want to use your default camera, do:
     ```bash
     cam_feed = cv2.VideoCapture(0)

@@ -55,7 +55,7 @@ while True:
                         display_percentage_probability=True,
                         display_object_name=True)
       
-      cv2.imshow("", annotated_image)
+      #cv2.imshow("", annotated_image)
       if preds and preds[0]:
         dict_obj = preds[0]
         cs = dict_obj['percentage_probability']
@@ -68,6 +68,7 @@ while True:
         action, belief = jl.eval(f"generate_action({cs})") 
         if action == 1:
           print('ALERT OPERATOR!')
+          cv2.imshow("", annotated_image)
         if action == 2:
           print('GATHER INFORMATION!')
         if action == 3:

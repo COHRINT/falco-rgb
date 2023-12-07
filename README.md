@@ -27,3 +27,23 @@ If you are about to write instructions in a README file, you might want to do it
     ```bash
     git clone https://github.com/Abdoulaye27/falco.git
     ```
+2. **Navigate to the cloned folder**
+    ```bash
+    cd /path/to/cloned_folder
+    ```
+    Replace '/path/to/cloned_folder' with the path where the cloned folder resides.
+3. **Download RGB-YOLO weights in the cloned folder**
+    ```bash
+    https://drive.google.com/drive/folders/1dicOWSAtrVBVZ9JX94gTCl-clzZJ3_im?usp=sharing
+    ```
+    The YOLO weights are stored in the `yolo_weights.h5` file. Make sure to download in the cloned folder containing the following files: `falco_function.jl`, `detection_imagePub.py`, and `policy.out`.
+4. **Chose your camera feed input**
+   If you want to use your default camera, do:
+    ```bash
+    cam_feed = cv2.VideoCapture(0)
+    ```
+    
+5. **Run the autonomous detection framework**
+   ```bash
+   python detection_imagePub.py
+   ```

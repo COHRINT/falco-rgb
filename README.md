@@ -37,7 +37,12 @@ If you are about to write instructions in a README file, you might want to do it
     https://drive.google.com/drive/folders/1dicOWSAtrVBVZ9JX94gTCl-clzZJ3_im?usp=sharing
     ```
     The YOLO weights are stored in the `yolo_weights.h5` file. Make sure to download in the cloned folder containing the following files: `falco_function.jl`, `detection_imagePub.py`, and `policy.out`.
-4. **Chose your camera feed input**
+4. **Dependencies**
+   Run the following command to install all dependencies
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. **Chose your camera feed input**
    
    If you want to use your default camera, do:
     ```bash
@@ -57,7 +62,7 @@ If you are about to write instructions in a README file, you might want to do it
     Example: rtsp_url = rtmp://myip:1935/myapp/mystream
     cam_feed = cv2.VideoCapture("rtmp://myip:1935/myapp/mystream")
     ```
-5. **Run the autonomous detection framework**
+6. **Run the autonomous detection framework**
    ```bash
    python detection_imagePub.py
    ```

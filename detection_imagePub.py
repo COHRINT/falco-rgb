@@ -64,7 +64,7 @@ while True:
         print('Detected target is {}'.format(target))
         #print(belief)
         if cs is None:
-          cs = -1
+          cs = 0
         action, belief = jl.eval(f"generate_action({cs})") 
         if action == 1:
           print('ALERT OPERATOR!')

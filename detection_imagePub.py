@@ -14,7 +14,7 @@ from imageai.Detection import ObjectDetection
 
 # Import the message publisher function
 #from objectInfomessagePublisher import messagePublisher2 
-from image_messagePublisher import publish_image
+#from image_messagePublisher import publish_image
 
 import cv2
 # The script below creates an object of the object detection class.
@@ -30,8 +30,8 @@ obj_detect.setModelPath(r"/home/walle/COHRINT/yolo.h5")
 obj_detect.loadModel()
 
 # The next step is to capture your webcam stream. To do so, execute the script below:
-cam_feed = cv2.VideoCapture(0)
-#cam_feed = cv2.VideoCapture("rtsp://rinao:unicorn@192.168.1.5:8554/streaming/live/1")
+#cam_feed = cv2.VideoCapture(0)
+cam_feed = cv2.VideoCapture("rtsp://rinao:unicorn@192.168.1.5:8554/streaming/live/1")
 
 # Next, you need to define height and width for the frame that will display the detected objects from your live feed. 
 # Execute the following script to do so, recognizing you can change the integer values near the end to match your desired dimensions:

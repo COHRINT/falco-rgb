@@ -61,3 +61,6 @@ If you are about to write instructions in a README file, you might want to do it
    ```bash
    python detection_imagePub.py
    ```
+   If you want to stop the program, click on the display screen then type "Q" or "ESC".
+## Requirements
+You can find all the librairies in the `requirements.txt` file.

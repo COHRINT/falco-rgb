@@ -138,7 +138,7 @@ function generate_action(cs)
     action, _ = action_info(sarsop_policy, belief) 
     #println(belief)
     #println(action)
-    if cs == -1 
+    if cs == 0 
         belief = initial_belief()  # initialize the belief
         statefulbelief = StatefulBelief(belief)
     else

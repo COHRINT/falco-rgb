@@ -78,7 +78,7 @@ async def main():
                   cv2.imshow("", annotated_image)
                 if action == 2:
                   print('GATHER INFORMATION!')
-                  await send_json(ws_client, {"action": "Gather_Information", "args": {"key1": "value1", "key2": "value2"}})
+                  await send_json(ws_client, {"action": "FlightStatus", "args": {"event": "gather-info"}})
                   # If we need to execute retrieve info from the main server use data
                   # data = await ws_client.recv()
                 if action == 3:

@@ -76,7 +76,7 @@ async def main():
                 if action == 1:
                   print('ALERT OPERATOR!')
                   cv2.imshow("", annotated_image)
-                  await send_json(ws_client, {"action": "NewObservation", "args": {"event": "alert", "image": imageUrl}})
+                  await send_json(ws_client, {"action": "NewAlert", "args": {"event": "alert", "image": imageUrl}})
                 if action == 2:
                   print('GATHER INFORMATION!')
                   cv2.imshow("", annotated_image)

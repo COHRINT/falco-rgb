@@ -49,6 +49,7 @@ async def send_json(ws_client, data):
 
 async def main():
     uri = "ws://localhost:8085"
+    threshold = 0.8
     async with websockets.connect(uri) as ws_client:
         print("FALCO Awaiting data...")
         count_frame = 0
@@ -72,21 +73,29 @@ async def main():
                 print('Detected target is {}'.format(target))
                 if cs is None:
                   cs = 0
-                action, belief = jl.eval(f"generate_action({cs})")
-                if action == 1:
-                  print('ALERT OPERATOR!')
-                  cv2.imshow("", annotated_image)
-                  await send_json(ws_client, {"action": "NewAlert", "args": {"event": "alert", "image": imageUrl}})
-                if action == 2:
-                  print('GATHER INFORMATION!')
-                  cv2.imshow("", annotated_image)
-                  await send_json(ws_client, {"action": "NewObservation", "args": {"event": "gather-info"}})
-                if action == 3:
-                  print('CONTINUE MISSION!')
-                print("----------------------------------------------------")
-              else:
-                print("No objects detected in the current frame.")
-                print("----------------------------------------------------")
+                # action, belief = jl.eval(f"generate_action({cs})")
+              
+              #send confidence score for hippo
+              await send_json(ws_client, {"action": "ConfidenceScore", "args": {"score": cs}})
+              
+              if cs > threshold:
+                cv2.imshow("", annotated_image)
+                await send_json(ws_client, {"action": "NewAlert", "args": {"event": "alert", "image": imageUrl}})
+                
+              #   if action == 1:
+              #     print('ALERT OPERATOR!')
+              #     cv2.imshow("", annotated_image)
+              #     await send_json(ws_client, {"action": "NewAlert", "args": {"event": "alert", "image": imageUrl}})
+              #   if action == 2:
+              #     print('GATHER INFORMATION!')
+              #     cv2.imshow("", annotated_image)
+              #     await send_json(ws_client, {"action": "NewObservation", "args": {"event": "gather-info"}})
+              #   if action == 3:
+              #     print('CONTINUE MISSION!')
+              #   print("----------------------------------------------------")
+              # else:
+              #   print("No objects detected in the current frame.")
+              #   print("----------------------------------------------------")
 
             # To stop the program, press "q" or "ESC"
             if (cv2.waitKey(1) & 0xFF == ord("q")) or (cv2.waitKey(1)==27):

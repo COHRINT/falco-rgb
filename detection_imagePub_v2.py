@@ -77,6 +77,10 @@ async def main():
                 for box in boxes:
                     x1, y1, x2, y2 = map(int, box.xyxy[0].tolist())  # Extract coordinates and convert to integers
                     conf = box.conf[0].item()  # Confidence score
+
+                    # Ghritachi - added new message -- send confidence score to hippo every time
+                    await send_json(ws_client, {"action": "ConfidenceScore", "args": {"score": conf}})
+
                     if conf < CONFIDENCE_THRESHOLD: ## Set the correct threshold
                         continue
                     cls = int(box.cls[0].item())  # Class label index

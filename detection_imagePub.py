@@ -5,6 +5,7 @@ import json
 import os
 from julia.api import Julia
 from imageai.Detection import ObjectDetection
+import base64
 
 jl = Julia(compiled_modules=False)
 # Load your Julia functions
@@ -35,13 +36,20 @@ cam_feed = cv2.VideoCapture(0)
 cam_feed.set(cv2.CAP_PROP_FRAME_WIDTH, 650)
 cam_feed.set(cv2.CAP_PROP_FRAME_HEIGHT, 750)
 
+
+def img_to_base64_string(image):
+    _,image = cv2.imencode('.jpg',image)
+    imgBase64 = base64.b64encode(image.tobytes())
+    return f"data:image/jpeg;base64,{imgBase64.decode()}"
+
 async def send_json(ws_client, data):
     json_data = json.dumps(data)
     await ws_client.send(json_data)
-    print(f"Sent: {json_data}")
+    print(f"Sent JSON data: {data['args']['event']}")
 
 async def main():
     uri = "ws://localhost:8085"
+    threshold = 0.8
     async with websockets.connect(uri) as ws_client:
         print("FALCO Awaiting data...")
         count_frame = 0
@@ -55,6 +63,7 @@ async def main():
                                 output_type="array",
                                 display_percentage_probability=True,
                                 display_object_name=True)
+              imageUrl = img_to_base64_string(annotated_image)
 
               if preds and preds[0]:
                 dict_obj = preds[0]
@@ -64,21 +73,29 @@ async def main():
                 print('Detected target is {}'.format(target))
                 if cs is None:
                   cs = 0
-                action, belief = jl.eval(f"generate_action({cs})")
-                action = 2
-                if action == 1:
-                  print('ALERT OPERATOR!')
-                  cv2.imshow("", annotated_image)
-                if action == 2:
-                  print('GATHER INFORMATION!')
-                  cv2.imshow("", annotated_image)
-                  await send_json(ws_client, {"action": "FlightStatus", "args": {"event": "gather-info"}})
-                if action == 3:
-                  print('CONTINUE MISSION!')
-                print("----------------------------------------------------")
-              else:
-                print("No objects detected in the current frame.")
-                print("----------------------------------------------------")
+                # action, belief = jl.eval(f"generate_action({cs})")
+              
+              #send confidence score for hippo
+              await send_json(ws_client, {"action": "ConfidenceScore", "args": {"score": cs}})
+              
+              if cs > threshold:
+                cv2.imshow("", annotated_image)
+                await send_json(ws_client, {"action": "NewAlert", "args": {"event": "alert", "image": imageUrl}})
+                
+              #   if action == 1:
+              #     print('ALERT OPERATOR!')
+              #     cv2.imshow("", annotated_image)
+              #     await send_json(ws_client, {"action": "NewAlert", "args": {"event": "alert", "image": imageUrl}})
+              #   if action == 2:
+              #     print('GATHER INFORMATION!')
+              #     cv2.imshow("", annotated_image)
+              #     await send_json(ws_client, {"action": "NewObservation", "args": {"event": "gather-info"}})
+              #   if action == 3:
+              #     print('CONTINUE MISSION!')
+              #   print("----------------------------------------------------")
+              # else:
+              #   print("No objects detected in the current frame.")
+              #   print("----------------------------------------------------")
 
             # To stop the program, press "q" or "ESC"
             if (cv2.waitKey(1) & 0xFF == ord("q")) or (cv2.waitKey(1)==27):

@@ -75,6 +75,22 @@ Python: `Python 3.8.10`
 
 You can find all the librairies in the `requirements.txt` file.
 
+## Citation
+
+You can cite FALCO in your projects and research papers via the BibTeX entry below.
+```bash
+@inbook{doi:10.2514/6.2024-2769,
+author = {Abdoulaye Diallo and Hunter M. Ray and Nisar R. Ahmed},
+title = {FALCO: Flight and AI-Enabled Coordination and Object-detection for Search and Rescue Missions},
+booktitle = {AIAA SCITECH 2024 Forum},
+chapter = {},
+pages = {},
+doi = {10.2514/6.2024-2769},
+URL = {https://arc.aiaa.org/doi/abs/10.2514/6.2024-2769},
+eprint = {https://arc.aiaa.org/doi/pdf/10.2514/6.2024-2769}
+}
+```
+
 ## Acknowledgements
 
 <details><summary> <b>Expand</b> </summary>
